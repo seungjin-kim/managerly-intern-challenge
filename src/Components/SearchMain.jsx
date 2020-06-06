@@ -14,4 +14,17 @@ export default class SearchMain extends React.Component {
   componentDidMount() {
 
   }
+
+  getPopularVideos() {
+    
+  }
+
+  render () {
+
+    return (
+      <div>
+        Hi
+      </div>
+    );
+  }
 }
