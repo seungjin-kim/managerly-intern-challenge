@@ -3,10 +3,11 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import YOUTUBE_API_KEY from './config/youtube.js';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App API_KEY={YOUTUBE_API_KEY} />
   </React.StrictMode>,
   document.getElementById('root')
 );
