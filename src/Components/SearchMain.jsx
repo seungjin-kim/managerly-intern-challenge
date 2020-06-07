@@ -3,6 +3,7 @@ import axios from 'axios';
 import YOUTUBE_API_KEY from '../config/youtube.js';
 import VideoResults from './VideoResults.jsx';
 import VideoMain from './VideoMain.jsx';
+import Search from './Search.jsx';
 
 
 export default class SearchMain extends React.Component {
@@ -17,7 +18,7 @@ export default class SearchMain extends React.Component {
   }
 
   componentDidMount() {
-    this.getPopularVideos();
+    this.searchVideos("kittens");
   }
 
   getPopularVideos() {
@@ -46,7 +47,7 @@ export default class SearchMain extends React.Component {
   }
 
   searchVideos(query) {
-    axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${this.state.searchTerm}&key=${YOUTUBE_API_KEY}`)
+    axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${query}&key=${YOUTUBE_API_KEY}`)
     .then(res => {
       this.setState({
         videos: res.data.items,
@@ -60,22 +61,23 @@ export default class SearchMain extends React.Component {
   }
 
 
-
   render () {
     return (
       <div>
-        <nav className="navbar">
-          Navbar
+        <nav>
+          Search
+          <br />
+          <Search handleSearchInputChange={this.searchVideos.bind(this)} />
         </nav>
         <div className="row">
-          <div className="col-md-7">
+          <div className="col-one">
             <h5>Main Video</h5>
             <VideoMain 
               vid={this.state.mainVideo}
             />
           </div>
-          <div className="col-md-5">
-            <div><h5>Related Videos</h5></div>
+          <div className="col-two">
+            <div><h5>Videos</h5></div>
             <VideoResults
               videos={this.state.videos}
               handleVideoEntryClick={(e) => this.handleVideoEntryClick(e)}
