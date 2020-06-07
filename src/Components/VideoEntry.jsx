@@ -9,7 +9,6 @@ const VideoEntry = (props) => (
       <div>{props.video.snippet.title}</div>
     </div>
   </div>
-  
 )
 
 export default VideoEntry;

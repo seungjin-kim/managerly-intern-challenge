@@ -4,7 +4,7 @@ import VideoEntry from './VideoEntry.jsx';
 const VideoResults = (props) => (
   <div className="video-results">
     {props.videos.map(video =>
-      <VideoEntry key={video.id.videoId} video={video} />
+      <VideoEntry key={video.id} video={video} />
       )}
   </div>
 );

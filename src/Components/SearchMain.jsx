@@ -1,7 +1,8 @@
 import React from 'react';
 import axios from 'axios';
-import YOUTUBE_API_KEY from '../config/youtube.js'
-import VideoResults from './VideoResults.jsx'
+import YOUTUBE_API_KEY from '../config/youtube.js';
+import VideoResults from './VideoResults.jsx';
+import VideoMain from './VideoMain.jsx';
 
 
 export default class SearchMain extends React.Component {
@@ -10,22 +11,37 @@ export default class SearchMain extends React.Component {
 
     this.state = {
       videos: [],
+      mainVideo: {},
     };
   }
 
   componentDidMount() {
-    console.log("Component did mount successful")
-    this.getPopularVideos()
+    this.getPopularVideos();
   }
 
   getPopularVideos() {
-    axios.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&regionCode=US&part=snippet&key=${YOUTUBE_API_KEY}`)
+    axios.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&regionCode=US&type=video&key=${YOUTUBE_API_KEY}`)
       .then(res => {
         console.log("getPopularVideos results", res);
+        console.log(res.data.items[0])
         this.setState({
           videos: res.data.items,
+          mainVideo: res.data.items[0],
         })
       })
+      .catch(err => {
+        if (err) {
+          this.setState({
+            videos: []
+          })
+        }
+      });
+  }
+
+  handleVideoEntryClick(video) {
+    this.setState({
+      mainVideo: video
+    })
   }
 
 
@@ -38,10 +54,13 @@ export default class SearchMain extends React.Component {
         </nav>
         <div className="row">
           <div className="col-md-7">
-            Video Player
+            <h5>Main Video</h5>
+            <VideoMain 
+              vid={this.state.mainVideo}
+            />
           </div>
           <div className="col-md-5">
-            <div><h5>List of Videos</h5></div>
+            <div><h5>Related Videos</h5></div>
             <VideoResults
               videos={this.state.videos}
             />
