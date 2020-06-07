@@ -37,8 +37,8 @@ export default class SearchMain extends React.Component {
           Navbar
         </nav>
         <div className="row">
-          <div classNAme="col-md-7">
-
+          <div className="col-md-7">
+            Video Player
           </div>
           <div className="col-md-5">
             <div><h5>List of Videos</h5></div>
