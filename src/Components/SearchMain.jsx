@@ -12,6 +12,7 @@ export default class SearchMain extends React.Component {
     this.state = {
       videos: [],
       mainVideo: {},
+      searchTerm: '',
     };
   }
 
@@ -41,7 +42,21 @@ export default class SearchMain extends React.Component {
   handleVideoEntryClick(video) {
     this.setState({
       mainVideo: video
+    });
+  }
+
+  searchVideos(query) {
+    axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${this.state.searchTerm}&key=${YOUTUBE_API_KEY}`)
+    .then(res => {
+      this.setState({
+        videos: res.data.items,
+      })
     })
+    .catch(err => {
+      if (err) {
+        this.setState({videos: []})
+      }
+    });
   }
 
 
@@ -63,6 +78,7 @@ export default class SearchMain extends React.Component {
             <div><h5>Related Videos</h5></div>
             <VideoResults
               videos={this.state.videos}
+              handleVideoEntryClick={(e) => this.handleVideoEntryClick(e)}
             />
             
           </div>

@@ -6,7 +6,7 @@ const VideoEntry = (props) => (
       <img src={props.video.snippet.thumbnails.default.url} alt="" />
     </div>
     <div>
-      <div>{props.video.snippet.title}</div>
+      <div onClick={ () => props.handleVideoEntryClick(props.video) }>{props.video.snippet.title}</div>
     </div>
   </div>
 )
