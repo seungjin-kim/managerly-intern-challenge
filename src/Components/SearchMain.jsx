@@ -19,7 +19,7 @@ export default class SearchMain extends React.Component {
   }
 
   getPopularVideos() {
-    axios.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&regionCode=US&key=${YOUTUBE_API_KEY}`)
+    axios.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&regionCode=US&part=snippet&key=${YOUTUBE_API_KEY}`)
       .then(res => {
         console.log("getPopularVideos results", res);
         this.setState({
@@ -31,7 +31,6 @@ export default class SearchMain extends React.Component {
 
 
   render () {
-
     return (
       <div>
         <nav className="navbar">

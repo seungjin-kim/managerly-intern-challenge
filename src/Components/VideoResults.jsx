@@ -1,5 +1,5 @@
 import React from 'react';
-import VideoEntry from './Components/VideoEntry.jsx';
+import VideoEntry from './VideoEntry.jsx';
 
 const VideoResults = (props) => (
   <div className="video-results">
