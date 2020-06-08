@@ -1,12 +1,18 @@
 import React from 'react';
 
+
 const VideoEntry = (props) => (
+  
   <div>
     <div>
-      <img src={props.video.snippet.thumbnails.default.url} alt="" />
+      <br></br>
+      <img src={props.video.snippet.thumbnails.medium.url} alt="" />
     </div>
     <div>
-      <div onClick={ () => props.handleVideoEntryClick(props.video) }>{props.video.snippet.title}</div>
+      <div>Title: {props.video.snippet.title}</div>
+      <div>Channel: {props.video.snippet.channelTitle}</div>
+      {/* <div>Views: {props.video.statistics.viewCount}</div> */}
+      {/* <div>Likes: {props.video.statistics.likeCount}</div> */}
     </div>
   </div>
 )
